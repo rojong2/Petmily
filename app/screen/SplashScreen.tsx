@@ -71,12 +71,6 @@ const styles = StyleSheet.create({
   pawIconText: {
     fontSize: 40,
   },
-  pawIcon: {
-    width: 50,
-    height: 50,
-    marginRight: 15,
-    tintColor: "#4A4A4A",
-  },
   logoText: {
     fontSize: 48,
     fontWeight: "bold",

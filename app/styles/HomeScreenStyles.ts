@@ -143,9 +143,6 @@ export const modalStyles = StyleSheet.create({
     marginBottom: 15,
     lineHeight: 20,
   },
-  modalOptionsRow: {
-    gap: 12,
-  },
   modalCheckboxRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -182,31 +179,6 @@ export const modalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
-  },
-  helperModal: {
-    backgroundColor: "rgba(255, 255, 255, 0.95)",
-    padding: 20,
-    borderRadius: 30,
-    width: "100%",
-    maxWidth: 360,
-    gap: 12,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  helperTitle: {
-    fontWeight: "bold",
-    fontSize: 20,
-    color: "#4A4A4A",
-  },
-  helperBody: {
-    color: "#6B6B6B",
-    lineHeight: 20,
   },
 });
 

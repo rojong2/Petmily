@@ -2,11 +2,9 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import {
-  Modal,
   Pressable,
   SafeAreaView,
   ScrollView,
-  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -35,15 +33,7 @@ const HomeScreen = () => {
   const [serviceMode, setServiceMode] = useState<ServiceMode>("PW");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const {
-    helperStatus,
-    dontAskAgain: persistedDontAskAgain,
-    becomeHelper,
-    saveDontAskAgain,
-  } = useHelperStatus();
-  const [localDontAskAgain, setLocalDontAskAgain] = useState(
-    persistedDontAskAgain
-  );
+  const { helperStatus, becomeHelper } = useHelperStatus();
 
   const handleNavigateToHelper = () => {
     navigation.navigate("HelperDashboard");
@@ -52,15 +42,6 @@ const HomeScreen = () => {
   const handleJoinHelper = async () => {
     await becomeHelper();
     handleNavigateToHelper();
-  };
-
-  const handleLater = () => {
-    // 나중에요 버튼 클릭 시 아무것도 하지 않음
-  };
-
-  const handleDontAskAgainChange = (value: boolean) => {
-    setLocalDontAskAgain(value);
-    saveDontAskAgain(value);
   };
 
   const currentMode = SERVICE_MODE_CONFIG[serviceMode];
@@ -142,63 +123,37 @@ const HomeScreen = () => {
         </View>
 
         {/* 헬퍼 참여 제안 */}
-        {!localDontAskAgain &&
-          !helperStatus.isHelper &&
-          serviceMode === "PW" && (
-            <View style={modalStyles.modalBox}>
-              <Text style={modalStyles.modalTitle}>
-                🤝 헬퍼로 참여하시겠어요?
-              </Text>
-              <Text style={modalStyles.modalBody}>
-                다른 반려동물 가족들을 도와주는 헬퍼가 되어보세요!
-              </Text>
-              <View style={modalStyles.modalOptionsRow}>
-                <View style={modalStyles.modalCheckboxRow}>
-                  <Switch
-                    value={localDontAskAgain}
-                    onValueChange={handleDontAskAgainChange}
-                    trackColor={{ false: "#E0E0E0", true: currentMode.color }}
-                    thumbColor={localDontAskAgain ? "#fff" : "#f4f3f4"}
-                  />
-                  <Text style={modalStyles.checkboxLabel}>다시 묻지 않기</Text>
-                </View>
-                <View style={modalStyles.modalButtonsRow}>
-                  <Pressable
-                    style={[
-                      modalStyles.choiceBtn,
-                      modalStyles.primaryBtn,
-                      {
-                        backgroundColor: currentMode.color,
-                        borderColor: currentMode.color,
-                      },
-                    ]}
-                    onPress={handleJoinHelper}>
-                    <Text
-                      style={[
-                        modalStyles.choiceBtnText,
-                        modalStyles.primaryBtnText,
-                      ]}>
-                      네, 참여할게요
-                    </Text>
-                  </Pressable>
-                  <Pressable
-                    style={[
-                      modalStyles.choiceBtn,
-                      { borderColor: currentMode.color },
-                    ]}
-                    onPress={handleLater}>
-                    <Text
-                      style={[
-                        modalStyles.choiceBtnText,
-                        { color: currentMode.color },
-                      ]}>
-                      나중에요
-                    </Text>
-                  </Pressable>
-                </View>
-              </View>
+        {!helperStatus.isHelper && serviceMode === "PW" && (
+          <View style={modalStyles.modalBox}>
+            <Text style={modalStyles.modalTitle}>
+              🤝 헬퍼로 참여하시겠어요?
+            </Text>
+            <Text style={modalStyles.modalBody}>
+              다른 반려동물 가족들을 도와주는 헬퍼가 되어보세요!
+            </Text>
+            <View style={modalStyles.modalButtonsRow}>
+              <Pressable
+                style={[
+                  modalStyles.choiceBtn,
+                  modalStyles.primaryBtn,
+                  {
+                    backgroundColor: currentMode.color,
+                    borderColor: currentMode.color,
+                    flex: 1,
+                  },
+                ]}
+                onPress={handleJoinHelper}>
+                <Text
+                  style={[
+                    modalStyles.choiceBtnText,
+                    modalStyles.primaryBtnText,
+                  ]}>
+                  네, 참여할게요
+                </Text>
+              </Pressable>
             </View>
-          )}
+          </View>
+        )}
 
         {/* 헬퍼 대시보드 바로가기 */}
         {helperStatus.isHelper && serviceMode === "PW" && (
@@ -241,62 +196,6 @@ const HomeScreen = () => {
       </ScrollView>
 
       <BottomNavigation onTabPress={handleTabPress} />
-
-      <Modal visible={false} transparent animationType="fade">
-        <View style={modalStyles.overlay}>
-          <View style={modalStyles.helperModal}>
-            <Text style={modalStyles.helperTitle}>
-              🤝 헬퍼로 참여하시겠어요?
-            </Text>
-            <Text style={modalStyles.helperBody}>
-              다른 반려동물 가족들을 도와주는 산책 도우미나 매니저가 되어보세요!
-            </Text>
-            <View style={modalStyles.modalButtonsRow}>
-              <Pressable
-                style={[
-                  modalStyles.choiceBtn,
-                  modalStyles.primaryBtn,
-                  {
-                    backgroundColor: currentMode.color,
-                    borderColor: currentMode.color,
-                  },
-                ]}
-                onPress={handleJoinHelper}>
-                <Text
-                  style={[
-                    modalStyles.choiceBtnText,
-                    modalStyles.primaryBtnText,
-                  ]}>
-                  네, 참여할게요
-                </Text>
-              </Pressable>
-              <Pressable
-                style={[
-                  modalStyles.choiceBtn,
-                  { borderColor: currentMode.color },
-                ]}
-                onPress={handleLater}>
-                <Text
-                  style={[
-                    modalStyles.choiceBtnText,
-                    { color: currentMode.color },
-                  ]}>
-                  나중에요
-                </Text>
-              </Pressable>
-            </View>
-            <View style={modalStyles.modalCheckboxRow}>
-              <Switch
-                value={localDontAskAgain}
-                onValueChange={handleDontAskAgainChange}
-                trackColor={{ false: "#E0E0E0", true: currentMode.color }}
-                thumbColor={localDontAskAgain ? "#fff" : "#f4f3f4"}
-              />
-              <Text style={modalStyles.checkboxLabel}>다시 묻지 않기</Text>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 };

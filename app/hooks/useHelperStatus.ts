@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
 const HELPER_STATUS_KEY = "petmily_helper_status";
-const DONT_ASK_AGAIN_KEY = "petmily_dont_ask_again";
 
 export interface HelperStatus {
   isHelper: boolean;
@@ -23,7 +22,6 @@ export const useHelperStatus = () => {
     completedWalks: 0,
     rating: 0,
   });
-  const [dontAskAgain, setDontAskAgain] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -32,16 +30,10 @@ export const useHelperStatus = () => {
 
   const loadHelperStatus = async () => {
     try {
-      const [statusData, dontAskData] = await Promise.all([
-        AsyncStorage.getItem(HELPER_STATUS_KEY),
-        AsyncStorage.getItem(DONT_ASK_AGAIN_KEY),
-      ]);
+      const statusData = await AsyncStorage.getItem(HELPER_STATUS_KEY);
 
       if (statusData) {
         setHelperStatus(JSON.parse(statusData));
-      }
-      if (dontAskData) {
-        setDontAskAgain(JSON.parse(dontAskData));
       }
     } catch (error) {
       console.error("헬퍼 상태 로드 실패:", error);
@@ -56,15 +48,6 @@ export const useHelperStatus = () => {
       setHelperStatus(status);
     } catch (error) {
       console.error("헬퍼 상태 저장 실패:", error);
-    }
-  };
-
-  const saveDontAskAgain = async (value: boolean) => {
-    try {
-      await AsyncStorage.setItem(DONT_ASK_AGAIN_KEY, JSON.stringify(value));
-      setDontAskAgain(value);
-    } catch (error) {
-      console.error("다시 묻지 않기 설정 저장 실패:", error);
     }
   };
 
@@ -104,12 +87,10 @@ export const useHelperStatus = () => {
 
   return {
     helperStatus,
-    dontAskAgain,
     isLoading,
     becomeHelper,
     updateEarnings,
     completeWalk,
-    saveDontAskAgain,
   };
 };
 

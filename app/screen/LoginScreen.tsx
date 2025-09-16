@@ -221,12 +221,6 @@ const styles = StyleSheet.create({
   logoIconText: {
     fontSize: 50,
   },
-  logoIcon: {
-    width: 60,
-    height: 60,
-    marginBottom: 10,
-    tintColor: "#C59172",
-  },
   logoTitle: {
     fontSize: 36,
     fontWeight: "bold",
@@ -248,14 +242,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
     color: "#333",
-  },
-  forgotButton: {
-    alignSelf: "flex-end",
-    marginBottom: 20,
-  },
-  forgotText: {
-    color: "#C59172",
-    fontSize: 14,
   },
   mainButton: {
     backgroundColor: "#C59172",
