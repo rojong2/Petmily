@@ -1,14 +1,16 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import TabNavigator from "./navigation/TabNavigator";
+import TabNavigator, { TabParamList } from "./navigation/TabNavigator";
 import HelperDashboardScreen from "./screen/HelperDashboardScreen";
 import LoginScreen from "./screen/LoginScreen";
 import MatchingScreen from "./screen/MatchingScreen";
+import ShopScreen from "./screen/ShopScreen";
 import SplashScreen from "./screen/SplashScreen";
 
 export type RootStackParamList = {
   Login: undefined;
-  Main: undefined;
+  Main: { initialTab?: string } | undefined;
+  Shop: { category: string };
   HelperDashboard: undefined;
   MatchingScreen: undefined;
 };
@@ -35,7 +37,14 @@ export default function App() {
         headerShown: false,
       }}>
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Main" component={TabNavigator} />
+      <Stack.Screen name="Main">
+        {({ route }) => (
+          <TabNavigator
+            initialTab={route.params?.initialTab as keyof TabParamList}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="Shop" component={ShopScreen} />
       <Stack.Screen name="HelperDashboard" component={HelperDashboardScreen} />
       <Stack.Screen name="MatchingScreen" component={MatchingScreen} />
     </Stack.Navigator>
