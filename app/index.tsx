@@ -1,14 +1,14 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
+import TabNavigator from "./navigation/TabNavigator";
 import HelperDashboardScreen from "./screen/HelperDashboardScreen";
-import HomeScreen from "./screen/HomeScreen";
 import LoginScreen from "./screen/LoginScreen";
 import MatchingScreen from "./screen/MatchingScreen";
 import SplashScreen from "./screen/SplashScreen";
 
 export type RootStackParamList = {
   Login: undefined;
-  Home: undefined;
+  Main: undefined;
   HelperDashboard: undefined;
   MatchingScreen: undefined;
 };
@@ -35,7 +35,7 @@ export default function App() {
         headerShown: false,
       }}>
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Main" component={TabNavigator} />
       <Stack.Screen name="HelperDashboard" component={HelperDashboardScreen} />
       <Stack.Screen name="MatchingScreen" component={MatchingScreen} />
     </Stack.Navigator>

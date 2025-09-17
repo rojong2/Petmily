@@ -46,7 +46,7 @@ const LoginScreen = ({ navigation }: Props) => {
       return;
     }
     // 로그인 로직 구현
-    navigation.navigate("Home");
+    navigation.navigate("Main");
   };
 
   const handleSignup = () => {

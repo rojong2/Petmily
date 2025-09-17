@@ -10,13 +10,13 @@ interface NavItem {
 
 interface BottomNavigationProps {
   onTabPress?: (tabName: string) => void;
+  activeTab?: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
   {
     name: "Home",
     icon: require("../../assets/images/home.png"),
-    isActive: true,
   },
   {
     name: "Explore",
@@ -30,6 +30,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   onTabPress,
+  activeTab = "Home",
 }) => {
   return (
     <View style={navigationStyles.bottomNav}>
@@ -38,7 +39,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
           key={item.name}
           style={[
             navigationStyles.navBtn,
-            item.isActive && navigationStyles.navBtnActive,
+            activeTab === item.name && navigationStyles.navBtnActive,
           ]}
           onPress={() => onTabPress?.(item.name)}>
           <Image
@@ -49,7 +50,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
           <Text
             style={[
               navigationStyles.navText,
-              item.isActive && navigationStyles.navTextActive,
+              activeTab === item.name && navigationStyles.navTextActive,
             ]}>
             {item.name}
           </Text>

@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { BottomNavigation } from "../components/BottomNavigation";
 import { PetMallContent } from "../components/PetMallContent";
 import { PetWalkerContent } from "../components/PetWalkerContent";
 import { SERVICE_MODE_CONFIG, ServiceMode } from "../constants/ServiceModes";
@@ -23,10 +22,7 @@ import {
   modeStyles,
 } from "../styles/HomeScreenStyles";
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  "Home"
->;
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
@@ -48,10 +44,6 @@ const HomeScreen = () => {
 
   const handleCategoryPress = (category: string) => {
     console.log(`Selected category: ${category}`);
-  };
-
-  const handleTabPress = (tabName: string) => {
-    console.log(`Selected tab: ${tabName}`);
   };
 
   return (
@@ -194,8 +186,6 @@ const HomeScreen = () => {
           />
         )}
       </ScrollView>
-
-      <BottomNavigation onTabPress={handleTabPress} />
     </SafeAreaView>
   );
 };
