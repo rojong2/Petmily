@@ -34,17 +34,6 @@ export const PetWalkerContent: React.FC<PetWalkerContentProps> = ({
           backgroundColor={currentMode.color}
         />
       </View>
-
-      <View style={homeScreenStyles.section}>
-        <Text style={homeScreenStyles.sectionTitle}>🐾 내 반려동물</Text>
-        <CardBox
-          icon="🐕"
-          description="등록된 반려동물 정보를 관리하세요"
-          actionText="정보 관리"
-          borderColor={currentMode.color}
-          backgroundColor={currentMode.color}
-        />
-      </View>
     </>
   );
 };

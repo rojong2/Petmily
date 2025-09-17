@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
@@ -98,13 +99,24 @@ const SettingsScreen = () => {
     },
   ];
 
+  const clearAsyncStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      console.log("AsyncStorage cleared successfully");
+    } catch (error) {
+      console.error("Failed to clear AsyncStorage:", error);
+      Alert.alert("오류", "로그아웃 중 문제가 발생했습니다.");
+    }
+  };
+  //나중에 clearAsyncStorage 함수 삭제
   const handleLogout = () => {
     Alert.alert("로그아웃", "정말 로그아웃하시겠습니까?", [
       { text: "취소", style: "cancel" },
       {
         text: "로그아웃",
         style: "destructive",
-        onPress: () => {
+        onPress: async () => {
+          await clearAsyncStorage();
           navigation.navigate("Login");
         },
       },
@@ -112,7 +124,8 @@ const SettingsScreen = () => {
   };
 
   return (
-    <SafeAreaView style={homeScreenStyles.root}>
+    <SafeAreaView
+      style={[homeScreenStyles.root, { backgroundColor: "#FFF5F0" }]}>
       <View
         style={[
           headerStyles.header,
@@ -127,14 +140,14 @@ const SettingsScreen = () => {
             <Text style={homeScreenStyles.sectionTitle}>{section.title}</Text>
             <View
               style={{
-                backgroundColor: "white",
-                borderRadius: 15,
+                backgroundColor: "rgba(255, 255, 255, 0.95)",
+                borderRadius: 20,
                 marginBottom: 20,
                 shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 4,
-                elevation: 3,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.12,
+                shadowRadius: 8,
+                elevation: 4,
               }}>
               {section.items.map((item, itemIndex) => (
                 <TouchableOpacity
@@ -143,10 +156,11 @@ const SettingsScreen = () => {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    padding: 16,
+                    paddingVertical: 18,
+                    paddingHorizontal: 20,
                     borderBottomWidth:
                       itemIndex < section.items.length - 1 ? 1 : 0,
-                    borderBottomColor: "#f0f0f0",
+                    borderBottomColor: "rgba(240, 240, 240, 0.5)",
                   }}
                   onPress={item.action}
                   disabled={item.hasSwitch}>
@@ -190,17 +204,23 @@ const SettingsScreen = () => {
           <TouchableOpacity
             style={{
               backgroundColor: "#FF6B6B",
-              borderRadius: 12,
-              padding: 16,
+              borderRadius: 20,
+              padding: 20,
               alignItems: "center",
               marginBottom: 20,
+              marginHorizontal: 20,
+              shadowColor: "#FF6B6B",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.15,
+              shadowRadius: 8,
+              elevation: 4,
             }}
             onPress={handleLogout}>
             <Text
               style={{
                 color: "white",
-                fontSize: 16,
-                fontWeight: "600",
+                fontSize: 18,
+                fontWeight: "bold",
               }}>
               로그아웃
             </Text>

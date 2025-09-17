@@ -43,7 +43,7 @@ const HomeScreen = () => {
   const currentMode = SERVICE_MODE_CONFIG[serviceMode];
 
   const handleCategoryPress = (category: string) => {
-    console.log(`Selected category: ${category}`);
+    navigation.navigate("Shop", { category });
   };
 
   return (
@@ -118,10 +118,10 @@ const HomeScreen = () => {
         {!helperStatus.isHelper && serviceMode === "PW" && (
           <View style={modalStyles.modalBox}>
             <Text style={modalStyles.modalTitle}>
-              🤝 헬퍼로 참여하시겠어요?
+              🤝 워커로 참여하시겠어요?
             </Text>
             <Text style={modalStyles.modalBody}>
-              다른 반려동물 가족들을 도와주는 헬퍼가 되어보세요!
+              다른 반려동물 가족들을 도와주는 워커가 되어보세요!
             </Text>
             <View style={modalStyles.modalButtonsRow}>
               <Pressable
@@ -150,9 +150,9 @@ const HomeScreen = () => {
         {/* 헬퍼 대시보드 바로가기 */}
         {helperStatus.isHelper && serviceMode === "PW" && (
           <View style={modalStyles.modalBox}>
-            <Text style={modalStyles.modalTitle}>🎉 헬퍼로 활동 중입니다!</Text>
+            <Text style={modalStyles.modalTitle}>🎉 워커로 활동 중입니다!</Text>
             <Text style={modalStyles.modalBody}>
-              헬퍼 대시보드에서 수익과 매칭 현황을 확인해보세요.
+              워커 대시보드에서 수익과 매칭 현황을 확인해보세요.
             </Text>
             <View style={modalStyles.modalButtonsRow}>
               <Pressable
@@ -170,7 +170,7 @@ const HomeScreen = () => {
                     modalStyles.choiceBtnText,
                     modalStyles.primaryBtnText,
                   ]}>
-                  헬퍼 대시보드 보기
+                  워커 대시보드 보기
                 </Text>
               </Pressable>
             </View>

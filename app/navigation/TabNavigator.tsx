@@ -1,22 +1,27 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import ExploreScreen from "../screen/ExploreScreen";
 import HomeScreen from "../screen/HomeScreen";
+import MyPetScreen from "../screen/MyPetScreen";
 import SettingsScreen from "../screen/SettingsScreen";
 import { navigationStyles } from "../styles/HomeScreenStyles";
 
 export type TabParamList = {
   HomeTab: undefined;
-  ExploreTab: undefined;
+  MyPetTab: undefined;
   SettingsTab: undefined;
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
-const TabNavigator = () => {
+interface TabNavigatorProps {
+  initialTab?: keyof TabParamList;
+}
+
+const TabNavigator = ({ initialTab = "HomeTab" }: TabNavigatorProps) => {
   return (
     <Tab.Navigator
+      initialRouteName={initialTab}
       screenOptions={{
         headerShown: false,
         tabBarStyle: navigationStyles.bottomNav,
@@ -47,10 +52,10 @@ const TabNavigator = () => {
                     name: "Home",
                     icon: require("../../assets/images/home.png"),
                   };
-                case "ExploreTab":
+                case "MyPetTab":
                   return {
-                    name: "Explore",
-                    icon: require("../../assets/images/explore.png"),
+                    name: "My Pet",
+                    icon: require("../../assets/images/paw.png"),
                   };
                 case "SettingsTab":
                   return {
@@ -106,12 +111,12 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="ExploreTab"
-        component={ExploreScreen}
+        name="MyPetTab"
+        component={MyPetScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
-              source={require("../../assets/images/explore.png")}
+              source={require("../../assets/images/paw.png")}
               style={[navigationStyles.navIcon]}
               resizeMode="contain"
             />

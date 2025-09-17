@@ -19,8 +19,8 @@ const NAV_ITEMS: NavItem[] = [
     icon: require("../../assets/images/home.png"),
   },
   {
-    name: "Explore",
-    icon: require("../../assets/images/explore.png"),
+    name: "MyPet",
+    icon: require("../../assets/images/paw.png"),
   },
   {
     name: "Settings",
