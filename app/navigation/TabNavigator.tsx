@@ -5,12 +5,14 @@ import ExploreScreen from "../screen/ExploreScreen";
 import HomeScreen from "../screen/HomeScreen";
 import MyPetScreen from "../screen/MyPetScreen";
 import SettingsScreen from "../screen/SettingsScreen";
+import ShopMainScreen from "../screen/ShopMainScreen";
 import { navigationStyles } from "../styles/HomeScreenStyles";
 
 export type TabParamList = {
   HomeTab: undefined;
   MyPetTab: undefined;
   ExploreTab: undefined;
+  ShopTab: { initialCategory?: string } | undefined;
   SettingsTab: undefined;
 };
 
@@ -18,9 +20,13 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 interface TabNavigatorProps {
   initialTab?: keyof TabParamList;
+  shopTabParams?: { initialCategory: string };
 }
 
-const TabNavigator = ({ initialTab = "HomeTab" }: TabNavigatorProps) => {
+const TabNavigator = ({
+  initialTab = "HomeTab",
+  shopTabParams,
+}: TabNavigatorProps) => {
   return (
     <Tab.Navigator
       initialRouteName={initialTab}
@@ -63,6 +69,11 @@ const TabNavigator = ({ initialTab = "HomeTab" }: TabNavigatorProps) => {
                   return {
                     name: "Explore",
                     icon: require("../../assets/images/explore.png"),
+                  };
+                case "ShopTab":
+                  return {
+                    name: "Shop",
+                    icon: require("../../assets/images/paw.png"), // 임시로 paw 아이콘 사용
                   };
                 case "SettingsTab":
                   return {
@@ -137,6 +148,20 @@ const TabNavigator = ({ initialTab = "HomeTab" }: TabNavigatorProps) => {
           tabBarIcon: ({ focused }) => (
             <Image
               source={require("../../assets/images/explore.png")}
+              style={[navigationStyles.navIcon]}
+              resizeMode="contain"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ShopTab"
+        component={ShopMainScreen}
+        initialParams={shopTabParams}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={require("../../assets/images/paw.png")}
               style={[navigationStyles.navIcon]}
               resizeMode="contain"
             />
