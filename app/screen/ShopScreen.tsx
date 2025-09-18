@@ -218,11 +218,11 @@ const ShopScreen = () => {
       </View>
 
       <View
-        style={{ padding: 16, backgroundColor: "rgba(255, 255, 255, 0.95)" }}>
-        <View style={headerStyles.searchBar}>
+        style={{ padding: 10, backgroundColor: "rgba(255, 255, 255, 0.95)" }}>
+        <View style={[headerStyles.searchBar, { paddingVertical: 15 }]}>
           <Text style={headerStyles.searchIcon}>🔍</Text>
           <TextInput
-            style={headerStyles.searchInput}
+            style={[headerStyles.searchInput, { paddingVertical: 6 }]}
             placeholder="상품명 또는 브랜드 검색"
             placeholderTextColor="#888"
             value={searchQuery}
@@ -294,4 +294,3 @@ const ShopScreen = () => {
 };
 
 export default ShopScreen;
-
