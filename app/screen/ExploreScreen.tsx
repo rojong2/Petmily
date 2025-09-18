@@ -65,13 +65,14 @@ const ExploreScreen = () => {
   ];
 
   return (
-    <SafeAreaView style={homeScreenStyles.root}>
+    <SafeAreaView
+      style={[homeScreenStyles.root, { backgroundColor: "#FFF5F0" }]}>
       <View
         style={[
           headerStyles.header,
           { backgroundColor: "rgba(255, 255, 255, 0.95)" },
         ]}>
-        <Text style={headerStyles.logo}>🔍 탐색</Text>
+        <Text style={headerStyles.logo}>🔍 Explore</Text>
         <View style={headerStyles.headerRight}>
           <View style={headerStyles.searchBar}>
             <Text style={headerStyles.searchIcon}>🔍</Text>
@@ -101,23 +102,17 @@ const ExploreScreen = () => {
                     flex: 0,
                     width: "48%",
                     minHeight: 80,
-                    backgroundColor: "#f8f9fa",
-                    borderWidth: 1,
-                    borderColor: "#e9ecef",
+                    backgroundColor: "rgba(255, 255, 255, 0.95)",
+                    borderWidth: 2,
+                    borderColor: "#E0E0E0",
                   },
                 ]}>
                 <Text style={[modeStyles.modeIcon, { fontSize: 24 }]}>
                   {category.icon}
                 </Text>
                 <View style={modeStyles.modeTextContainer}>
-                  <Text style={[modeStyles.modeChipTitle, { color: "#333" }]}>
-                    {category.title}
-                  </Text>
-                  <Text
-                    style={[
-                      modeStyles.modeChipSubtitle,
-                      { fontSize: 11, color: "#666" },
-                    ]}>
+                  <Text style={modeStyles.modeChipTitle}>{category.title}</Text>
+                  <Text style={modeStyles.modeChipSubtitle}>
                     {category.description}
                   </Text>
                 </View>
@@ -134,11 +129,10 @@ const ExploreScreen = () => {
               <TouchableOpacity
                 key={place.id}
                 style={{
-                  backgroundColor: "#fff",
-                  borderRadius: 12,
-                  padding: 16,
-                  borderWidth: 1,
-                  borderColor: "#e9ecef",
+                  backgroundColor: "rgba(255, 255, 255, 0.95)",
+                  borderRadius: 15,
+                  padding: 18,
+                  borderWidth: 0,
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.1,
@@ -156,13 +150,17 @@ const ExploreScreen = () => {
                       style={{
                         fontSize: 16,
                         fontWeight: "600",
-                        color: "#333",
+                        color: "#4A4A4A",
                         marginBottom: 4,
                       }}>
                       {place.name}
                     </Text>
                     <Text
-                      style={{ fontSize: 14, color: "#666", marginBottom: 8 }}>
+                      style={{
+                        fontSize: 14,
+                        color: "#888",
+                        marginBottom: 8,
+                      }}>
                       {place.type}
                     </Text>
                     <View
@@ -178,11 +176,11 @@ const ExploreScreen = () => {
                           gap: 4,
                         }}>
                         <Text style={{ color: "#ffd700" }}>⭐</Text>
-                        <Text style={{ fontSize: 14, color: "#333" }}>
+                        <Text style={{ fontSize: 14, color: "#4A4A4A" }}>
                           {place.rating}
                         </Text>
                       </View>
-                      <Text style={{ fontSize: 14, color: "#666" }}>
+                      <Text style={{ fontSize: 14, color: "#888" }}>
                         {place.distance}
                       </Text>
                     </View>
@@ -191,8 +189,8 @@ const ExploreScreen = () => {
                     style={{
                       width: 60,
                       height: 60,
-                      backgroundColor: "#f8f9fa",
-                      borderRadius: 8,
+                      backgroundColor: "#F8F8F8",
+                      borderRadius: 12,
                       justifyContent: "center",
                       alignItems: "center",
                     }}>
@@ -216,15 +214,20 @@ const ExploreScreen = () => {
                   alignItems: "center",
                   paddingVertical: 12,
                   paddingHorizontal: 16,
-                  backgroundColor: "#f8f9fa",
-                  borderRadius: 8,
+                  backgroundColor: "rgba(255, 255, 255, 0.95)",
+                  borderRadius: 12,
                   gap: 12,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.1,
+                  shadowRadius: 4,
+                  elevation: 3,
                 }}>
-                <Text style={{ color: "#666" }}>🕐</Text>
-                <Text style={{ flex: 1, fontSize: 14, color: "#333" }}>
+                <Text style={{ color: "#888" }}>🕐</Text>
+                <Text style={{ flex: 1, fontSize: 14, color: "#4A4A4A" }}>
                   {search}
                 </Text>
-                <Text style={{ color: "#666" }}>✕</Text>
+                <Text style={{ color: "#888" }}>✕</Text>
               </TouchableOpacity>
             ))}
           </View>
