@@ -1,9 +1,9 @@
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { ModeConfig } from "../constants/ServiceModes";
-import { RootStackParamList } from "../index";
+import { TabParamList } from "../navigation/TabNavigator";
 import { homeScreenStyles } from "../styles/HomeScreenStyles";
 import { CardBox } from "./CardBox";
 import { CategoryList } from "./CategoryList";
@@ -13,7 +13,7 @@ interface PetMallContentProps {
   onCategoryPress?: (category: string) => void;
 }
 
-type PetMallNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type PetMallNavigationProp = BottomTabNavigationProp<TabParamList>;
 
 export const PetMallContent: React.FC<PetMallContentProps> = ({
   currentMode,
@@ -22,10 +22,7 @@ export const PetMallContent: React.FC<PetMallContentProps> = ({
   const navigation = useNavigation<PetMallNavigationProp>();
 
   const handleShopNavigation = (category?: string) => {
-    navigation.navigate("Main", {
-      initialTab: "ShopTab",
-      ShopTab: { initialCategory: category || "전체" },
-    });
+    navigation.navigate("ShopTab", { initialCategory: category || "전체" });
   };
 
   return (

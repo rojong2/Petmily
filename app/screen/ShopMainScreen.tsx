@@ -1,6 +1,11 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Alert,
   FlatList,
@@ -38,11 +43,14 @@ const ShopMainScreen = () => {
 
   const categories = ["전체", "사료", "간식", "장난감", "용품"];
 
-  useEffect(() => {
-    if (route.params?.initialCategory) {
-      setSelectedCategory(route.params.initialCategory);
-    }
-  }, [route.params?.initialCategory]);
+  useFocusEffect(
+    useCallback(() => {
+      if (route.params?.initialCategory) {
+        setSelectedCategory(route.params.initialCategory);
+        navigation.setParams({ initialCategory: undefined });
+      }
+    }, [route.params?.initialCategory, navigation])
+  );
 
   useEffect(() => {
     const categoryProducts = getProductsByCategory(selectedCategory);
