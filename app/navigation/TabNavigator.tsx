@@ -65,15 +65,15 @@ const TabNavigator = ({
                     name: "My Pet",
                     icon: require("../../assets/images/paw.png"),
                   };
-                case "ExploreTab":
-                  return {
-                    name: "Explore",
-                    icon: require("../../assets/images/explore.png"),
-                  };
                 case "ShopTab":
                   return {
                     name: "Shop",
                     icon: require("../../assets/images/paw.png"), // 임시로 paw 아이콘 사용
+                  };
+                case "ExploreTab":
+                  return {
+                    name: "Explore",
+                    icon: require("../../assets/images/explore.png"),
                   };
                 case "SettingsTab":
                   return {
@@ -142,19 +142,6 @@ const TabNavigator = ({
         }}
       />
       <Tab.Screen
-        name="ExploreTab"
-        component={ExploreScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/images/explore.png")}
-              style={[navigationStyles.navIcon]}
-              resizeMode="contain"
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="ShopTab"
         component={ShopMainScreen}
         initialParams={shopTabParams}
@@ -162,6 +149,19 @@ const TabNavigator = ({
           tabBarIcon: ({ focused }) => (
             <Image
               source={require("../../assets/images/paw.png")}
+              style={[navigationStyles.navIcon]}
+              resizeMode="contain"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ExploreTab"
+        component={ExploreScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={require("../../assets/images/explore.png")}
               style={[navigationStyles.navIcon]}
               resizeMode="contain"
             />
