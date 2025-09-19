@@ -40,6 +40,10 @@ const HomeScreen = () => {
     handleNavigateToHelper();
   };
 
+  const handleWalkBooking = () => {
+    navigation.navigate("Booking");
+  };
+
   const currentMode = SERVICE_MODE_CONFIG[serviceMode];
 
   const handleCategoryPress = (category: string) => {
@@ -113,6 +117,37 @@ const HomeScreen = () => {
             ))}
           </View>
         </View>
+
+        {/* 산책 예약하기 */}
+        {serviceMode === "PW" && (
+          <View style={modalStyles.modalBox}>
+            <Text style={modalStyles.modalTitle}>🐕 산책 예약하기</Text>
+            <Text style={modalStyles.modalBody}>
+              우리 아이와 함께 즐거운 산책 시간을 만들어보세요!
+            </Text>
+            <View style={modalStyles.modalButtonsRow}>
+              <Pressable
+                style={[
+                  modalStyles.choiceBtn,
+                  modalStyles.primaryBtn,
+                  {
+                    backgroundColor: currentMode.color,
+                    borderColor: currentMode.color,
+                    flex: 1,
+                  },
+                ]}
+                onPress={handleWalkBooking}>
+                <Text
+                  style={[
+                    modalStyles.choiceBtnText,
+                    modalStyles.primaryBtnText,
+                  ]}>
+                  산책 예약하러 가기
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        )}
 
         {/* 헬퍼 참여 제안 */}
         {!helperStatus.isHelper && serviceMode === "PW" && (
