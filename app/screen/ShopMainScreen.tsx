@@ -9,6 +9,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   Alert,
   FlatList,
+  Image,
   SafeAreaView,
   Text,
   TextInput,
@@ -279,7 +280,7 @@ const ShopMainScreen = () => {
                 addToCart(item);
               }}>
               <Text style={{ color: "white", fontSize: 12, fontWeight: "600" }}>
-                🛒 담기
+                담기
               </Text>
             </TouchableOpacity>
           </View>
@@ -308,7 +309,10 @@ const ShopMainScreen = () => {
             paddingVertical: 8,
             marginRight: 8,
           }}>
-          <Text style={{ fontSize: 20 }}>🛒</Text>
+          <Image
+            source={require("../../assets/images/shopping_cart.png")}
+            style={{ width: 20, height: 20 }}
+          />
           {getCartItemCount() > 0 && (
             <View
               style={{

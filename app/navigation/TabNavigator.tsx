@@ -68,7 +68,7 @@ const TabNavigator = ({
                 case "ShopTab":
                   return {
                     name: "Shop",
-                    icon: require("../../assets/images/paw.png"), // 임시로 paw 아이콘 사용
+                    icon: require("../../assets/images/shopping.png"),
                   };
                 case "ExploreTab":
                   return {
