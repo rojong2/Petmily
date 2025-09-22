@@ -2,13 +2,15 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import {
-  Alert,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
+    Alert,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
+import MenuButton from "../components/MenuButton";
+import SideMenuDrawer from "../components/SideMenuDrawer";
 import { Product } from "../constants/ProductData";
 import { RootStackParamList } from "../index";
 import { headerStyles, homeScreenStyles } from "../styles/HomeScreenStyles";
@@ -31,6 +33,7 @@ const CartScreen = () => {
   const { cartItems, setCart } = route.params as RouteParams;
 
   const [cart, setLocalCart] = useState<CartItem[]>(cartItems || []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const formatPrice = (price: number) => {
     return `${price.toLocaleString()}원`;
@@ -103,6 +106,9 @@ const CartScreen = () => {
     );
   };
 
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <SafeAreaView
       style={[homeScreenStyles.root, { backgroundColor: "#FFF5F0" }]}>
@@ -112,15 +118,18 @@ const CartScreen = () => {
           headerStyles.header,
           { backgroundColor: "rgba(255, 255, 255, 0.95)" },
         ]}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            paddingRight: 16,
-          }}>
-          <Text style={{ fontSize: 18, color: "#C59172", fontWeight: "600" }}>
-            ← 뒤로
-          </Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <MenuButton onPress={openMenu} style={{ marginRight: 12 }} />
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={{
+              paddingRight: 16,
+            }}>
+            <Text style={{ fontSize: 18, color: "#C59172", fontWeight: "600" }}>
+              ← 뒤로
+            </Text>
+          </TouchableOpacity>
+        </View>
         <Text style={[headerStyles.logo, { flex: 1, textAlign: "center" }]}>
           🛒 장바구니 ({getCartItemCount()})
         </Text>
@@ -409,6 +418,8 @@ const CartScreen = () => {
           </View>
         </>
       )}
+      
+      <SideMenuDrawer isVisible={isMenuOpen} onClose={closeMenu} />
     </SafeAreaView>
   );
 };

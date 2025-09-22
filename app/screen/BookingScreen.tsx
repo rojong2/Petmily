@@ -12,6 +12,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import MenuButton from "../components/MenuButton";
+import SideMenuDrawer from "../components/SideMenuDrawer";
 import { RootStackParamList } from "../index";
 import {
   headerStyles,
@@ -67,12 +69,13 @@ const BookingScreen = () => {
   });
 
   const [isEditingPet, setIsEditingPet] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const durationOptions = [
     { value: 30, label: "30분" },
-    { value: 60, label: "60분" },
-    { value: 90, label: "90분" },
-    { value: 120, label: "120분" },
+    { value: 60, label: "45분" },
+    { value: 90, label: "60분" },
+    { value: 120, label: "90분" },
   ];
 
   useEffect(() => {
@@ -128,6 +131,9 @@ const BookingScreen = () => {
     }));
   };
 
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <SafeAreaView style={homeScreenStyles.root}>
       {/* Header */}
@@ -137,6 +143,7 @@ const BookingScreen = () => {
           { backgroundColor: "rgba(255, 255, 255, 0.95)" },
         ]}>
         <View style={headerStyles.headerLeft}>
+          <MenuButton onPress={openMenu} style={{ marginRight: 12 }} />
           <Pressable
             onPress={handleBackPress}
             style={{
@@ -503,6 +510,8 @@ const BookingScreen = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      
+      <SideMenuDrawer isVisible={isMenuOpen} onClose={closeMenu} />
     </SafeAreaView>
   );
 };

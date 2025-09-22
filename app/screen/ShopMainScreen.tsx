@@ -1,21 +1,23 @@
 import {
-  RouteProp,
-  useFocusEffect,
-  useNavigation,
-  useRoute,
+    RouteProp,
+    useFocusEffect,
+    useNavigation,
+    useRoute,
 } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  Alert,
-  FlatList,
-  Image,
-  SafeAreaView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    Alert,
+    FlatList,
+    Image,
+    SafeAreaView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
+import MenuButton from "../components/MenuButton";
+import SideMenuDrawer from "../components/SideMenuDrawer";
 import { getProductsByCategory, Product } from "../constants/ProductData";
 import { RootStackParamList } from "../index";
 import { TabParamList } from "../navigation/TabNavigator";
@@ -41,6 +43,7 @@ const ShopMainScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const categories = ["전체", "사료", "간식", "장난감", "용품"];
 
@@ -118,6 +121,9 @@ const ShopMainScreen = () => {
   const getCartItemCount = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
   };
+
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
 
   const renderCategoryButton = (category: string) => (
     <TouchableOpacity
@@ -298,7 +304,10 @@ const ShopMainScreen = () => {
           headerStyles.header,
           { backgroundColor: "rgba(255, 255, 255, 0.95)" },
         ]}>
-        <Text style={headerStyles.logo}>🛍️ Shop</Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <MenuButton onPress={openMenu} style={{ marginRight: 12 }} />
+          <Text style={headerStyles.logo}>🛍️ Shop</Text>
+        </View>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate("Cart", { cartItems: cart, setCart: setCart })
@@ -454,6 +463,8 @@ const ShopMainScreen = () => {
           }
         />
       </View>
+      
+      <SideMenuDrawer isVisible={isMenuOpen} onClose={closeMenu} />
     </SafeAreaView>
   );
 };

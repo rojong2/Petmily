@@ -6,20 +6,19 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
+import Header from "../components/Header";
 import { PetMallContent } from "../components/PetMallContent";
 import { PetWalkerContent } from "../components/PetWalkerContent";
 import { SERVICE_MODE_CONFIG, ServiceMode } from "../constants/ServiceModes";
 import { useHelperStatus } from "../hooks/useHelperStatus";
 import { RootStackParamList } from "../index";
 import {
-  headerStyles,
   homeScreenStyles,
   modalStyles,
-  modeStyles,
+  modeStyles
 } from "../styles/HomeScreenStyles";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -56,28 +55,14 @@ const HomeScreen = () => {
         homeScreenStyles.root,
         { backgroundColor: currentMode.lightColor },
       ]}>
-      <View
-        style={[
-          headerStyles.header,
-          { backgroundColor: "rgba(255, 255, 255, 0.95)" },
-        ]}>
-        <Text style={headerStyles.logo}>🐾 PetMily</Text>
-        <View style={headerStyles.headerRight}>
-          <View style={headerStyles.searchBar}>
-            <Text style={headerStyles.searchIcon}>🔍</Text>
-            <TextInput
-              style={headerStyles.searchInput}
-              placeholder={
-                serviceMode === "PW" ? "산책 장소 검색" : "상품 검색"
-              }
-              placeholderTextColor="#888"
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              returnKeyType="search"
-            />
-          </View>
-        </View>
-      </View>
+      <Header
+        showSearch={true}
+        searchPlaceholder={
+          serviceMode === "PW" ? "산책 장소 검색" : "상품 검색"
+        }
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
 
       <ScrollView contentContainerStyle={homeScreenStyles.scrollContent}>
         <View style={homeScreenStyles.section}>

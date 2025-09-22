@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View
 } from "react-native";
+import Header from "../components/Header";
 import {
-  headerStyles,
-  homeScreenStyles,
-  modeStyles,
+    homeScreenStyles,
+    modeStyles
 } from "../styles/HomeScreenStyles";
 
 const ExploreScreen = () => {
@@ -67,26 +66,14 @@ const ExploreScreen = () => {
   return (
     <SafeAreaView
       style={[homeScreenStyles.root, { backgroundColor: "#FFF5F0" }]}>
-      <View
-        style={[
-          headerStyles.header,
-          { backgroundColor: "rgba(255, 255, 255, 0.95)" },
-        ]}>
-        <Text style={headerStyles.logo}>🔍 Explore</Text>
-        <View style={headerStyles.headerRight}>
-          <View style={headerStyles.searchBar}>
-            <Text style={headerStyles.searchIcon}>🔍</Text>
-            <TextInput
-              style={headerStyles.searchInput}
-              placeholder="장소나 시설을 검색해보세요"
-              placeholderTextColor="#888"
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              returnKeyType="search"
-            />
-          </View>
-        </View>
-      </View>
+      <Header
+        title="🔍 Explore"
+        showSearch={true}
+        searchPlaceholder="장소나 시설을 검색해보세요"
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        showBackButton={true}
+      />
 
       <ScrollView contentContainerStyle={homeScreenStyles.scrollContent}>
         {/* 카테고리 섹션 */}
