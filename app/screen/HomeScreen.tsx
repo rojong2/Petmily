@@ -61,7 +61,7 @@ const HomeScreen = () => {
           headerStyles.header,
           { backgroundColor: "rgba(255, 255, 255, 0.95)" },
         ]}>
-        <Text style={headerStyles.logo}>🐾 Petmily</Text>
+        <Text style={headerStyles.logo}>🐾 PetMily</Text>
         <View style={headerStyles.headerRight}>
           <View style={headerStyles.searchBar}>
             <Text style={headerStyles.searchIcon}>🔍</Text>
